@@ -1,0 +1,65 @@
+#define MAX 100
+
+typedef struct {
+    int arr[MAX];
+    int size;
+} heap;
+
+
+function heapify_up(heap *h, int i):
+    while i>0 AND h->arr[(i-1)/2] < h->arr[i]:
+        swap(h->arr[(i-1)/2], h->arr[i])
+        i = (i-1)/2
+
+function heapify_down(heap *h, int i):
+    int largest = i
+    int left = 2*i + 1
+    int right = 2*i + 2
+
+    if left < h->size AND h->arr[left] > h->arr[largest]:
+        largest = left
+    if right < h->size AND h->arr[right] > h->arr[largest]:
+        largest = right
+    if largest != i:
+        swap(h->arr[largest], h->arr[i])
+        heapify_down(h, largest)
+
+
+function insert(heap *h, int x):
+    if h->size >= MAX:
+        print "Heap overflow!"
+        return
+    
+    h->arr[h->size] = x
+    h->size = h->size + 1
+    heapify_up(h, h->size-1)
+
+function extract_max(heap *h):
+    if h->size <= 0:
+        print "Heap underflow!"
+        return
+
+    int x = h->arr[0]
+    h->arr[0] = h->arr[h->size-1]
+    h->size = h->size - 1
+    heapify_down(h, 0)
+    return x
+
+function peek(heap *h):
+    if h->size <= 0:
+        print "Heap underflow!"
+        return
+    return h->arr[0]
+
+function print_heap(heap *h):
+    if h->size <= 0:
+        print "Heap underflow!"
+        return
+    
+    for i=0 to h->size - 1:
+        print h->arr[i]
+
+main():
+    heap h;
+    h.size = 0;
+    ...
