@@ -1,0 +1,20 @@
+int stack[100]
+int top = -1
+
+function op(int x, int y, char a):
+    if a == '+' return x+y
+    if a == '-' return x-y
+    if a == '*' return x*y
+    if a == '/' return x/y
+
+function convert(char postfix[], int len):
+    for i=0 to len-1:
+        if postfix[i] >= '0' and postfix[i] <= '9':
+            push((int)postfix[i] - '0')
+        else:
+            int y = pop()
+            int x = pop()
+            push(op(x, y, postfix[i]))
+
+    return stack[top]
+    

@@ -1,0 +1,14 @@
+string stack[100]
+int top = -1
+
+function convert(char prefix[], int len):
+    for i=len-1 down to 0:
+        if prefix[i] >= '0' and prefix[i] <= '9':
+            push(string(prefix[i]))
+        else:
+            string x = pop()
+            string y = pop()
+            push("("+x+prefix[i]+y+")")
+
+    return stack[top]
+    

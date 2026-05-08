@@ -1,0 +1,14 @@
+string stack[100]
+int top = -1
+
+function convert(char postfix[], int len):
+    for i=0 to len-1:
+        if postfix[i] >= '0' and postfix[i] <= '9':
+            push(string(postfix[i]))
+        else:
+            string y = pop()
+            string x = pop()
+            push(postfix[i]+x+y)
+
+    return stack[top]
+    

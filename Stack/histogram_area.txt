@@ -1,0 +1,25 @@
+function area(int arr[], int n):
+    stack s
+
+    for i=0 to n-1:
+        while s is not empty and arr[top of s] >= arr[i]:
+            tp = top of s
+            pop()
+            if s is empty:
+                width = i
+            else:
+                width = i - top of s - 1
+            area = arr[tp] * width
+            max_area = max(area, max_area)
+        push(i)
+    
+    while s is not empty:
+        tp = pop()
+        if s is empty:
+            width = n
+        else:
+            width = n - top of s - 1
+        area = arr[tp] * width
+        max_area = max(area, max_area)
+
+    return max_area

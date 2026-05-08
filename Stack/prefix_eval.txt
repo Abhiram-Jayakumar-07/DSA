@@ -1,0 +1,20 @@
+int stack[100]
+int top = -1
+
+function op(int x, int y, char a):
+    if a == '+' return x+y
+    if a == '-' return x-y
+    if a == '*' return x*y
+    if a == '/' return x/y
+
+function convert(char prefix[], int len):
+    for i=len-1 down to 0:
+        if prefix[i] >= '0' and prefix[i] <= '9':
+            push((int)prefix[i] - '0')
+        else:
+            int x = pop()
+            int y = pop()
+            push(op(x, y, prefix[i]))
+
+    return stack[top]
+    

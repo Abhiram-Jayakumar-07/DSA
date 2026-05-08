@@ -1,0 +1,47 @@
+char stack[100]
+int top = -1
+
+function push(int x):
+    top = top + 1
+    stack[top] = x
+
+function pop():
+    if top == -1:
+        return '#'
+
+    int x = stack[top]
+    top = top - 1
+    return x
+
+function precedence(char x):
+    if x == '^': return 4
+    if x == '*' OR x == '/': return 3
+    if x == '+' OR x == '-': return 2
+    return 1
+
+function convert(char infix[], int len):
+    char postfix[len]
+    int c = 0
+    for i=0 to len-1:
+        if infix[i] == '(': 
+            push(infix[i])
+        else if infix[i] == ')':
+            while top != -1 AND stack[top] != '(':
+                postfix[c] = pop()
+                c = c + 1
+            pop()
+        else if infix[i] >= '0' AND infix[i] <= '9':
+            postfix[c] = infix[i]
+            c = c + 1
+        else:
+            while top != -1 AND (precedence(stack[top]) > precedence(infix[i]) OR (precedence(stack[top]) == precedence(infix[i]) AND infix[i] != '^')):
+                postfix[c] = pop()
+                c = c + 1
+            push(infix[i])
+
+    while top != -1:
+        postfix[c] = pop()
+        c = c + 1
+    postfix[c] = '\0'
+
+    return postfix

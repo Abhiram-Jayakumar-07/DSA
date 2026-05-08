@@ -1,0 +1,19 @@
+function find_celebrity(int mat[MAX][MAX], int n):
+    create stack s
+
+    for i=0 to n-1:
+        push i into s
+    
+    while size of s > 1:
+        a = pop from s
+        b = pop from s
+        if mat[a][b] == 1:
+            push b into s
+        else:
+            push a into s
+
+    candidate = pop from s
+    for i=0 to n-1:
+        if i!=candidate and (mat[candidate][i] == 1 or mat[i][candidate] == 0)
+            return -1
+    return candidate
