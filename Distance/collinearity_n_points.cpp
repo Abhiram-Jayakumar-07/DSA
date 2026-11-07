@@ -22,7 +22,7 @@ bool check_collinear(vector<Point> points) {
     int xdif = points[ref].x - points[0].x;
     int ydif = points[ref].y - points[0].y;
 
-    for (int i = 1; i < points.size(); i++) {
+    for (int i = ref + 1; i < points.size(); i++) {
         int curr_xdif = points[i].x - points[i-1].x;
         int curr_ydif = points[i].y - points[i-1].y;
         if (ydif*curr_xdif != xdif*curr_ydif)
